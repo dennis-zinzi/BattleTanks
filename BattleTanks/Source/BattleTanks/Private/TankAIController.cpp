@@ -20,3 +20,22 @@ void ATankAIController::BeginPlay(){
 	}
 }
 
+
+void ATankAIController::Tick(float DeltaTime){
+	Super::Tick(DeltaTime);
+
+	//TODO Move towards player
+
+	//Check tank is possessed
+	ATank *tank = GetControlledTank();
+	if(tank){
+		//Get player tank
+		ATank *playerTank = GetPlayerTank();
+		if(playerTank){
+			//Aim at player
+			tank->AimAt(playerTank->GetActorLocation());
+		}
+	}
+
+	//Fire at player if ready to
+}

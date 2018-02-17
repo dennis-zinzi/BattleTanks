@@ -37,6 +37,7 @@ void ATankPlayerController::AimTowardsCrosshair(){
 	//If hits landscape
 	if(GetSightRayHitLocation(HitLoc)){
 		//Tell controlled tank to aim barrel at location
+		GetControlledTank()->AimAt(HitLoc);
 	}
 }
 
@@ -53,8 +54,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation) const{
 	//Find camera look direction based on crosshair location
 	if(GetCameraLookDir(CrosshairLoc, CameraLookDir)){
 		//Create line trace to find any hits
-		if(GetCameraLookHitLocation(CameraLookDir, HitLocation))
-			UE_LOG(LogTemp, Warning, TEXT("Hit at: %s"), *(HitLocation.ToString()));
+		return GetCameraLookHitLocation(CameraLookDir, HitLocation);
 	}
 	
 	return false;
